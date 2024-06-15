@@ -154,28 +154,30 @@ pub mod tokenizer {
                     Ok(Header::Authorization(Authorization::new(tokenizer.value)))
                 }
                 s if s.eq_ignore_ascii_case("CSeq") => Ok(Header::CSeq(CSeq::new(tokenizer.value))),
-                s if s.eq_ignore_ascii_case("Call-Id") => {
+                s if s.eq_ignore_ascii_case("Call-Id") || s.eq_ignore_ascii_case("i") => {
                     Ok(Header::CallId(CallId::new(tokenizer.value)))
                 }
                 s if s.eq_ignore_ascii_case("Call-Info") => {
                     Ok(Header::CallInfo(CallInfo::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("Contact") => {
+                s if s.eq_ignore_ascii_case("Contact") || s.eq_ignore_ascii_case("m") => {
                     Ok(Header::Contact(Contact::new(tokenizer.value)))
                 }
                 s if s.eq_ignore_ascii_case("Content-Disposition") => Ok(
                     Header::ContentDisposition(ContentDisposition::new(tokenizer.value)),
                 ),
-                s if s.eq_ignore_ascii_case("Content-Encoding") => Ok(Header::ContentEncoding(
-                    ContentEncoding::new(tokenizer.value),
-                )),
+                s if s.eq_ignore_ascii_case("Content-Encoding") || s.eq_ignore_ascii_case("e") => {
+                    Ok(Header::ContentEncoding(ContentEncoding::new(
+                        tokenizer.value,
+                    )))
+                }
                 s if s.eq_ignore_ascii_case("Content-Language") => Ok(Header::ContentLanguage(
                     ContentLanguage::new(tokenizer.value),
                 )),
-                s if s.eq_ignore_ascii_case("Content-Length") => {
+                s if s.eq_ignore_ascii_case("Content-Length") || s.eq_ignore_ascii_case("l") => {
                     Ok(Header::ContentLength(ContentLength::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("Content-Type") => {
+                s if s.eq_ignore_ascii_case("Content-Type") || s.eq_ignore_ascii_case("c") => {
                     Ok(Header::ContentType(ContentType::new(tokenizer.value)))
                 }
                 s if s.eq_ignore_ascii_case("Date") => Ok(Header::Date(Date::new(tokenizer.value))),
@@ -188,7 +190,9 @@ pub mod tokenizer {
                 s if s.eq_ignore_ascii_case("Expires") => {
                     Ok(Header::Expires(Expires::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("From") => Ok(Header::From(From::new(tokenizer.value))),
+                s if s.eq_ignore_ascii_case("From") || s.eq_ignore_ascii_case("f") => {
+                    Ok(Header::From(From::new(tokenizer.value)))
+                }
                 s if s.eq_ignore_ascii_case("In-Reply-To") => {
                     Ok(Header::InReplyTo(InReplyTo::new(tokenizer.value)))
                 }
@@ -234,23 +238,27 @@ pub mod tokenizer {
                 s if s.eq_ignore_ascii_case("Server") => {
                     Ok(Header::Server(Server::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("Subject") => {
+                s if s.eq_ignore_ascii_case("Subject") || s.eq_ignore_ascii_case("s") => {
                     Ok(Header::Subject(Subject::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("Supported") => {
+                s if s.eq_ignore_ascii_case("Supported") || s.eq_ignore_ascii_case("k") => {
                     Ok(Header::Supported(Supported::new(tokenizer.value)))
                 }
                 s if s.eq_ignore_ascii_case("Timestamp") => {
                     Ok(Header::Timestamp(Timestamp::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("To") => Ok(Header::To(To::new(tokenizer.value))),
+                s if s.eq_ignore_ascii_case("To") || s.eq_ignore_ascii_case("t") => {
+                    Ok(Header::To(To::new(tokenizer.value)))
+                }
                 s if s.eq_ignore_ascii_case("Unsupported") => {
                     Ok(Header::Unsupported(Unsupported::new(tokenizer.value)))
                 }
                 s if s.eq_ignore_ascii_case("User-Agent") => {
                     Ok(Header::UserAgent(UserAgent::new(tokenizer.value)))
                 }
-                s if s.eq_ignore_ascii_case("Via") => Ok(Header::Via(Via::new(tokenizer.value))),
+                s if s.eq_ignore_ascii_case("Via") || s.eq_ignore_ascii_case("v") => {
+                    Ok(Header::Via(Via::new(tokenizer.value)))
+                }
                 s if s.eq_ignore_ascii_case("Warning") => {
                     Ok(Header::Warning(Warning::new(tokenizer.value)))
                 }
